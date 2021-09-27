@@ -14,6 +14,10 @@ function App() {
   const [userAccount, setUserAccount] = useState('');
   const [amount, setAmount] = useState(0);
 
+  async function requestAccount() {
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+  }
+
   async function getBalance() {
     if (typeof window.ethereum !== undefined) {
       const [account] = await window.ethereum.request({
@@ -36,10 +40,6 @@ function App() {
       await trnasaction.wait();
       console.log(`${amount} Coins successfully sent to ${userAccount}`);
     }
-  }
-
-  async function requestAccount() {
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
   }
 
   async function fetchGreeting() {
